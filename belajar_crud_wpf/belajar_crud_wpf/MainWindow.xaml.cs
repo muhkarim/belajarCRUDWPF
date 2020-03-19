@@ -48,11 +48,26 @@ namespace belajar_crud_wpf
         private void Btn_Insert_Click(object sender, RoutedEventArgs e)
         {
             var input = new Supplier (txt_name.Text , txt_address.Text);
-           
-            // push ke database
-            conn.Suppliers.Add(input);
-            conn.SaveChanges();
+
+            // validasi input
+            if (txt_name.Text == "")
+            {
+                MessageBox.Show("Nama tidak boleh kosong...");
+                txt_name.Focus();
+            }
+            else if (txt_address.Text == "")
+            {
+                MessageBox.Show("Address tidak boleh kosong...");
+                txt_address.Focus();
+            }
+            else
+            {
+                conn.Suppliers.Add(input);
+                conn.SaveChanges();
+            }
+
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
+
         }
 
         private void txt_id_PreviewTextInput(object sender, TextCompositionEventArgs e)
