@@ -84,7 +84,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Supplier.cs" />
-    <Compile Include="MyContext\MyContext.cs" />
+    <Compile Include="MyContext\myContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

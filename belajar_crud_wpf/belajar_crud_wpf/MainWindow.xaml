@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <Label x:Name="Id" Content="Id" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.862,1.115" Margin="10,33,0,0"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,0.795"/>
+        <TextBox x:Name="txt_id" HorizontalAlignment="Left" Height="23" Margin="108,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" PreviewTextInput="txt_id_PreviewTextInput" IsReadOnly="True"/>
+        <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="23" Margin="108,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="txt_name_PreviewTextInput"/>
+        <TextBox x:Name="txt_address" HorizontalAlignment="Left" Height="24" Margin="108,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="txt_address_PreviewTextInput"/>
+        <DataGrid x:Name="tbl_supplier" HorizontalAlignment="Left" Height="100" Margin="108,184,0,0" VerticalAlignment="Top" Width="336" SelectionChanged="tbl_supplier_SelectionChanged" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         
+        <Button x:Name="btn_insert" Content="Insert" HorizontalAlignment="Left" Margin="409,35,0,0" VerticalAlignment="Top" Width="75" Click="Btn_Insert_Click"/>
+        <Button x:Name="btn_update" Content="Update" HorizontalAlignment="Left" Margin="409,68,0,0" VerticalAlignment="Top" Width="75" Click="btn_update_Click"/>
+        <Button x:Name="btn_delete" Content="Delete" HorizontalAlignment="Left" Margin="409,108,0,0" VerticalAlignment="Top" Width="75" Click="btn_delete_Click"/>
+        <Label Content="Output" HorizontalAlignment="Left" Margin="108,148,0,0" VerticalAlignment="Top" FontSize="20"/>
+
     </Grid>
 </Window>
