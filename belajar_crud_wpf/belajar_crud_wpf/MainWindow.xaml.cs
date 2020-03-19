@@ -62,8 +62,12 @@ namespace belajar_crud_wpf
             }
             else
             {
+                // push ke database
                 conn.Suppliers.Add(input);
                 conn.SaveChanges();
+                txt_name.Text = string.Empty;
+                txt_address.Text = string.Empty;
+                MessageBox.Show("Data Berhasil ditambahkan");
             }
 
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
@@ -77,38 +81,48 @@ namespace belajar_crud_wpf
 
         private void tbl_supplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+            
             var data = tbl_supplier.SelectedItem;
 
-            string id = (tbl_supplier.SelectedCells[0].Column.GetCellContent(data) as TextBlock).Text;
-            txt_id.Text = id;
+            if (data == null) {
+                tbl_supplier.ItemsSource = conn.Suppliers.ToList();
+            } else
+            {
+                string id = (tbl_supplier.SelectedCells[0].Column.GetCellContent(data) as TextBlock).Text;
+                txt_id.Text = id;
 
-            string name = (tbl_supplier.SelectedCells[1].Column.GetCellContent(data) as TextBlock).Text;
-            txt_name.Text = name;
+                string name = (tbl_supplier.SelectedCells[1].Column.GetCellContent(data) as TextBlock).Text;
+                txt_name.Text = name;
 
-            string address = (tbl_supplier.SelectedCells[2].Column.GetCellContent(data) as TextBlock).Text;
-            txt_address.Text = address;
+                string address = (tbl_supplier.SelectedCells[2].Column.GetCellContent(data) as TextBlock).Text;
+                txt_address.Text = address;
+            }
+
         }
 
         private void btn_update_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
-            var myId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
+            var cekId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
 
-            myId.Name = txt_name.Text;
-            myId.Address = txt_address.Text;
-
-            conn.SaveChanges();
+            cekId.Name = txt_name.Text;
+            cekId.Address = txt_address.Text;
+            var update = conn.SaveChanges();
+            MessageBox.Show(update + " telah di update");
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
         }
 
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
-            var myId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
-
-            // remove
-            conn.Suppliers.Remove(myId);
-            conn.SaveChanges();
+            var cekId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
+            conn.Suppliers.Remove(cekId);
+            var delete = conn.SaveChanges();
+            MessageBox.Show(delete + " telah dihapus");
+            txt_id.Text = string.Empty;
+            txt_name.Text = string.Empty;
+            txt_address.Text = string.Empty;
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); 
         }
 
