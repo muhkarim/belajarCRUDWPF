@@ -23,11 +23,16 @@ namespace belajar_crud_wpf
     public partial class MainWindow : Window
     {
         myContext conn = new myContext();
+        int cb_sup;
 
         public MainWindow()
         {
             InitializeComponent();
-            tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
+            tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table supplier
+
+            tbl_item.ItemsSource = conn.Items.ToList();
+            combo_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh combo suppliers
+           
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -45,6 +50,8 @@ namespace belajar_crud_wpf
 
         }
 
+
+        // Insert Suplier 
         private void Btn_Insert_Click(object sender, RoutedEventArgs e)
         {
             var input = new Supplier (txt_name.Text , txt_address.Text);
@@ -79,6 +86,7 @@ namespace belajar_crud_wpf
 
         }
 
+        // Data Grid Supplier
         private void tbl_supplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -101,6 +109,7 @@ namespace belajar_crud_wpf
 
         }
 
+        // Update Supplier
         private void btn_update_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
@@ -113,6 +122,8 @@ namespace belajar_crud_wpf
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
         }
 
+
+        // Delete supplier
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
@@ -123,7 +134,6 @@ namespace belajar_crud_wpf
             {
                 conn.Suppliers.Remove(cekId);
                 var delete = conn.SaveChanges();
-                MessageBox.Show(delete + " telah dihapus");
                 txt_id.Text = string.Empty;
                 txt_name.Text = string.Empty;
                 txt_address.Text = string.Empty;
@@ -141,5 +151,41 @@ namespace belajar_crud_wpf
         {
 
         }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        // Insert Item
+        private void btn_item_insert_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var inPrice = Convert.ToInt32(txt_item_price.Text);
+            var inStock = Convert.ToInt32(txt_item_stock.Text);
+            var suppId = conn.Suppliers.Where(S => S.Id == cb_sup).FirstOrDefault();
+
+            var inputItem = new Item(txt_item_name.Text, inPrice, inStock, suppId);
+            conn.Items.Add(inputItem);
+            conn.SaveChanges();
+
+            MessageBox.Show("Item has been inserted");
+            txt_item_name.Text= string.Empty;
+            txt_item_price.Text = string.Empty;
+            txt_item_stock.Text = string.Empty;
+
+            tbl_item.ItemsSource = conn.Items.ToList();
+        }
+
+        private void combo_supplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cb_sup = Convert.ToInt32(combo_supplier.SelectedValue.ToString());
+        }
+
     }
 }

@@ -11,8 +11,10 @@ namespace belajar_crud_wpf.MyContext
     public class myContext : DbContext
     {
         public myContext(): base("BelajarCRUDWPF") { }
+
         public DbSet<Supplier> Suppliers { get; set; }
 
+        public DbSet<Item> Items { get; set; }
 
     }
 }
