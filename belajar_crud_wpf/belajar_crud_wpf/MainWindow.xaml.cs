@@ -117,13 +117,19 @@ namespace belajar_crud_wpf
         {
             int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
             var cekId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
-            conn.Suppliers.Remove(cekId);
-            var delete = conn.SaveChanges();
-            MessageBox.Show(delete + " telah dihapus");
-            txt_id.Text = string.Empty;
-            txt_name.Text = string.Empty;
-            txt_address.Text = string.Empty;
-            tbl_supplier.ItemsSource = conn.Suppliers.ToList(); 
+
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                conn.Suppliers.Remove(cekId);
+                var delete = conn.SaveChanges();
+                MessageBox.Show(delete + " telah dihapus");
+                txt_id.Text = string.Empty;
+                txt_name.Text = string.Empty;
+                txt_address.Text = string.Empty;
+                tbl_supplier.ItemsSource = conn.Suppliers.ToList();
+            }
+             
         }
 
         private void txt_name_PreviewTextInput(object sender, TextCompositionEventArgs e)
