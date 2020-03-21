@@ -22,25 +22,26 @@
                     <TextBox x:Name="txt_item_name" HorizontalAlignment="Left" Height="23" Margin="0,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
                     <TextBox x:Name="txt_item_price" HorizontalAlignment="Left" Height="23" Margin="216,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
                     <TextBox x:Name="txt_item_stock" HorizontalAlignment="Left" Height="23" Margin="216,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                    <DataGrid x:Name="tbl_item" Height="132" Margin="10,130,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2" AutoGenerateColumns="False" >
+                    <DataGrid x:Name="tbl_item" Height="132" Margin="10,130,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionChanged="tbl_item_SelectionChanged" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
                             <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" />
                             <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier.Name}" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="btn_item_insert" Content="Insert" HorizontalAlignment="Left" Margin="360,14,0,0" VerticalAlignment="Top" Width="74" Grid.Column="1" Click="btn_item_insert_Click" Height="20"/>
-                    <Button x:Name="btn_item_update" Content="Update" HorizontalAlignment="Left" Margin="359,48,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Button_Click_2" Height="20"/>
+                    <Button x:Name="btn_item_update" Content="Update" HorizontalAlignment="Left" Margin="359,48,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btn_item_update_Click" Height="20"/>
                     <ComboBox x:Name="combo_supplier" 
                               ItemsSource="{Binding Suppliers}" 
                               DisplayMemberPath="Name" 
                               SelectedValuePath="Id" 
-                              SelectionChanged="combo_supplier_SelectionChanged" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="22"/>
+                              SelectionChanged="combo_supplier_SelectionChanged" 
+                              HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="22"/>
                     <Label Content="Supplier" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
                     <TextBox x:Name="txt_item_id" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="0,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Button Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="360,96,0,0" VerticalAlignment="Top" Width="76" Height="20"/>
+                    <Button x:Name="btn_item_delete" Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="360,96,0,0" VerticalAlignment="Top" Width="76" Height="20" Click="btn_item_delete_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Supplier" Margin="-3,0,-0.5,-2" Height="24" VerticalAlignment="Top">

@@ -22,15 +22,18 @@ namespace belajar_crud_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        myContext conn = new myContext();
-        int cb_sup;
+        myContext conn = new myContext(); // ceclare new obj myContext
+
+        public int cb_sup; // declare combo box supplir
 
         public MainWindow()
         {
             InitializeComponent();
+
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table supplier
 
-            tbl_item.ItemsSource = conn.Items.ToList();
+            tbl_item.ItemsSource = conn.Items.ToList(); // refresh table Item
+
             combo_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh combo suppliers
            
         }
@@ -56,7 +59,7 @@ namespace belajar_crud_wpf
         {
             var input = new Supplier (txt_name.Text , txt_address.Text);
 
-            // validasi input
+            // validation
             if (txt_name.Text == "")
             {
                 MessageBox.Show("Nama tidak boleh kosong...");
@@ -69,7 +72,7 @@ namespace belajar_crud_wpf
             }
             else
             {
-                // push ke database
+                // push to database
                 conn.Suppliers.Add(input);
                 conn.SaveChanges();
                 txt_name.Text = string.Empty;
@@ -87,6 +90,7 @@ namespace belajar_crud_wpf
         }
 
         // Data Grid Supplier
+        // Using Selection
         private void tbl_supplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -112,13 +116,14 @@ namespace belajar_crud_wpf
         // Update Supplier
         private void btn_update_Click(object sender, RoutedEventArgs e)
         {
-            int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
-            var cekId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
+            int inputId = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
+            var cekId = conn.Suppliers.Where(S => S.Id == inputId).FirstOrDefault(); // s -> objek dari tbl_supplier
 
             cekId.Name = txt_name.Text;
             cekId.Address = txt_address.Text;
             var update = conn.SaveChanges();
-            MessageBox.Show(update + " telah di update");
+            MessageBox.Show(update + " has been update");
+
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
         }
 
@@ -126,8 +131,8 @@ namespace belajar_crud_wpf
         // Delete supplier
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
-            int id = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
-            var cekId = conn.Suppliers.Where(S => S.Id == id).FirstOrDefault(); // s -> objek dari tbl_supplier
+            int inId = Convert.ToInt32(txt_id.Text); // menangkap id dari textbox id
+            var cekId = conn.Suppliers.Where(S => S.Id == inId).FirstOrDefault(); // s -> objek dari tbl_supplier
 
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete confirmation", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
@@ -157,10 +162,6 @@ namespace belajar_crud_wpf
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         // Insert Item
         private void btn_item_insert_Click(object sender, RoutedEventArgs e)
@@ -168,13 +169,13 @@ namespace belajar_crud_wpf
             
             var inPrice = Convert.ToInt32(txt_item_price.Text);
             var inStock = Convert.ToInt32(txt_item_stock.Text);
-            var suppId = conn.Suppliers.Where(S => S.Id == cb_sup).FirstOrDefault();
+            var inSupp = conn.Suppliers.Where(S => S.Id == cb_sup).FirstOrDefault();
 
-            var inputItem = new Item(txt_item_name.Text, inPrice, inStock, suppId);
+            var inputItem = new Item(txt_item_name.Text, inPrice, inStock, inSupp);
             conn.Items.Add(inputItem);
-            conn.SaveChanges();
+            var insert = conn.SaveChanges();
 
-            MessageBox.Show("Item has been inserted");
+            MessageBox.Show(insert + "Item has been inserted");
             txt_item_name.Text= string.Empty;
             txt_item_price.Text = string.Empty;
             txt_item_stock.Text = string.Empty;
@@ -182,10 +183,84 @@ namespace belajar_crud_wpf
             tbl_item.ItemsSource = conn.Items.ToList();
         }
 
+
+        // Set up combo supplier
         private void combo_supplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cb_sup = Convert.ToInt32(combo_supplier.SelectedValue.ToString());
+            cb_sup = Convert.ToInt32(combo_supplier.SelectedValue); // handle load supplier input in Item menu
         }
 
+        private void tbl_item_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var data = tbl_item.SelectedItem;
+
+            if (data == null)
+            {
+                tbl_item.ItemsSource = conn.Items.ToList();
+            }
+            else
+            {
+                string id = (tbl_item.SelectedCells[0].Column.GetCellContent(data) as TextBlock).Text;
+                txt_item_id.Text = id;
+
+                string name = (tbl_item.SelectedCells[1].Column.GetCellContent(data) as TextBlock).Text;
+                txt_item_name.Text = name;
+
+                string price = (tbl_item.SelectedCells[2].Column.GetCellContent(data) as TextBlock).Text;
+                txt_item_price.Text = price;
+
+                string stock = (tbl_item.SelectedCells[3].Column.GetCellContent(data) as TextBlock).Text;
+                txt_item_stock.Text = stock;
+
+                string supplier = (tbl_item.SelectedCells[4].Column.GetCellContent(data) as TextBlock).Text;
+                combo_supplier.Text = supplier;
+
+            }
+        }
+
+        private void btn_item_update_Click(object sender, RoutedEventArgs e)
+        {
+
+            int inputId = Convert.ToInt32(txt_item_id.Text);
+            var cekId = conn.Items.Where(S => S.Id == inputId).FirstOrDefault();
+            var inPrice = Convert.ToInt32(txt_item_price.Text);
+            var inStock = Convert.ToInt32(txt_item_stock.Text);
+            var inSupp = conn.Suppliers.Where(S => S.Id == cb_sup).FirstOrDefault();
+
+            cekId.Name = txt_item_name.Text;
+            cekId.Price = inPrice;
+            cekId.Stock = inStock;
+            cekId.Supplier = inSupp;
+            var update = conn.SaveChanges();
+            MessageBox.Show(update + " has been update");
+
+            txt_item_id.Text = string.Empty;
+            txt_item_name.Text = string.Empty;
+            txt_item_price.Text = string.Empty;
+            txt_item_stock.Text = string.Empty;
+            combo_supplier.Text = string.Empty;
+
+            tbl_item.ItemsSource = conn.Items.ToList();
+        }
+
+        private void btn_item_delete_Click(object sender, RoutedEventArgs e)
+        {
+            int inId = Convert.ToInt32(txt_item_id.Text); // menangkap id dari textbox id
+            var cekId = conn.Items.Where(S => S.Id == inId).FirstOrDefault(); // s -> objek dari tbl_supplier
+
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                conn.Items.Remove(cekId);
+                var delete = conn.SaveChanges();
+                txt_item_id.Text = string.Empty;
+                txt_item_name.Text = string.Empty;
+                txt_item_price.Text = string.Empty;
+                txt_item_stock.Text = string.Empty;
+                combo_supplier.Text = string.Empty;
+
+                tbl_item.ItemsSource = conn.Items.ToList();
+            }
+        }
     }
 }
