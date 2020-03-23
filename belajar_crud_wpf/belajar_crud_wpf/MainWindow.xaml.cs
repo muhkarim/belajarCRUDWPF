@@ -22,7 +22,7 @@ using System.Drawing;
 using System.Configuration;
 using System.Data.SqlClient;
 
-
+ 
 namespace belajar_crud_wpf
 {
     /// <summary>
@@ -34,9 +34,11 @@ namespace belajar_crud_wpf
 
         public int cb_sup; // menampung supplier_id
 
-        public int role_id = 1;
+        public int cb_role;
 
-        public MainWindow()
+        public string email;
+
+        public MainWindow(String remail)
         {
             InitializeComponent();
 
@@ -45,20 +47,43 @@ namespace belajar_crud_wpf
             tbl_item.ItemsSource = conn.Items.ToList(); // refresh table Item
 
             combo_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh combo suppliers
-           
+
+            combo_role.ItemsSource = conn.Roles.ToList();
+
+            email = remail;
+
+            roleAcces();
         }
 
 
+        private void roleAcces()
+        {
+            var role_acces = conn.Suppliers.Where(S => S.Email == email).FirstOrDefault();
+            if(role_acces.Role.Id == 2)
+            {
+                tab2.IsSelected = true;
+                tab1.IsEnabled = false;
+                tab1.IsSelected = false;
 
+
+
+            } else
+            {
+                tab1.IsEnabled = true;
+                tab2.IsEnabled = true;
+            }
+            
+        }
         
 
         // Insert Supplier 
         private void Btn_Insert_Click(object sender, RoutedEventArgs e)
         {
             string password = System.Guid.NewGuid().ToString();
+            var inRole = conn.Roles.Where(S => S.Id == cb_role).FirstOrDefault();
 
-            
-            var input = new Supplier(txt_name.Text, txt_address.Text, txt_email.Text, password);
+
+            var input = new Supplier(txt_name.Text, txt_address.Text, txt_email.Text, password, inRole);
             
             
             // patern email
@@ -316,8 +341,9 @@ namespace belajar_crud_wpf
         {
             string from = "keepkarim@gmail.com";
             string to = email;
+            string currentdate = DateTime.Now.ToString("dd/MM/yyyy");
             MailMessage mm = new MailMessage(from, to);
-            mm.Subject = "New Password to Login Application ";
+            mm.Subject = "New Password to Login Application " + currentdate + " ";
             string isi_pesan = "hi " + name + " this is your password " + password + " Thank you";
             mm.Body = isi_pesan;
             mm.IsBodyHtml = true;
@@ -375,6 +401,11 @@ namespace belajar_crud_wpf
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void combo_role_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cb_role = Convert.ToInt32(combo_role.SelectedValue);
         }
     }
 }

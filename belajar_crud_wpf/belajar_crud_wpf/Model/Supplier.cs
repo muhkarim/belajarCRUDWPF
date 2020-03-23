@@ -24,12 +24,13 @@ namespace belajar_crud_wpf.Model
             
         }
 
-        public Supplier(String name, String address, String email, String password)
+        public Supplier(String name, String address, String email, String password, Role role)
         {
             this.Name = name;
             this.Address = address;
             this.Email = email;
             this.Password = password;
+            this.Role = role;
             
             
         }

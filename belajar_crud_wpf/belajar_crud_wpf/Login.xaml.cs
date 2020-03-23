@@ -49,7 +49,7 @@ namespace belajar_crud_wpf
                 }
                 else
                 {
-                    var main = new MainWindow();
+                    MainWindow main = new MainWindow(txt_login_email.Text);
                     main.Show();
                     this.Close();
                 }
@@ -59,10 +59,7 @@ namespace belajar_crud_wpf
 
             }
 
-            //var main = new MainWindow();
-            //main.Show();
-            //this.Close();
-
+           
 
 
         }

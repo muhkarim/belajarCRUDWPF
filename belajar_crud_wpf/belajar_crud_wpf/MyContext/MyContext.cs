@@ -16,5 +16,7 @@ namespace belajar_crud_wpf.MyContext
 
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
     }
 }
