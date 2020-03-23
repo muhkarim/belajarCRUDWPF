@@ -28,7 +28,7 @@ namespace belajar_crud_wpf.Model
             this.Name = name;
             this.Price = price;
             this.Stock = stock;
-            this.Supplier = supplier;
+            this.Supplier  = supplier;
         }
     }
 }

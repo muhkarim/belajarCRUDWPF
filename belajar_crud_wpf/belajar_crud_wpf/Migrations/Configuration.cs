@@ -9,7 +9,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(belajar_crud_wpf.MyContext.myContext context)

@@ -5,24 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:belajar_crud_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="635.5">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Login" Height="600" Width="1080">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="467*"/>
+            <ColumnDefinition Width="608*"/>
+        </Grid.ColumnDefinitions>
         <Label Content="Output" HorizontalAlignment="Left" Margin="108,148,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TabControl HorizontalAlignment="Left" Height="302" Margin="22,10,0,0" VerticalAlignment="Top" Width="545">
+        <TabControl HorizontalAlignment="Left" Height="491" Margin="22,10,0,0" VerticalAlignment="Top" Width="1043" Grid.ColumnSpan="2">
             <TabItem Header="Item" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-2,0,-2.5,0" Width="60">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="75*"/>
-                        <ColumnDefinition Width="464*"/>
+                        <ColumnDefinition Width="91*"/>
+                        <ColumnDefinition Width="28*"/>
+                        <ColumnDefinition Width="736*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Id" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="20"/>
                     <Label Content="Name" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.434,0.365" Height="26" Width="42"/>
-                    <Label Content="Price" HorizontalAlignment="Left" Margin="146,14,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="36"/>
-                    <Label Content="Stock" HorizontalAlignment="Left" Margin="146,48,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="38"/>
-                    <TextBox x:Name="txt_item_name" HorizontalAlignment="Left" Height="23" Margin="0,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                    <TextBox x:Name="txt_item_price" HorizontalAlignment="Left" Height="23" Margin="216,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
-                    <TextBox x:Name="txt_item_stock" HorizontalAlignment="Left" Height="23" Margin="216,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                    <DataGrid x:Name="tbl_item" Height="132" Margin="10,130,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionChanged="tbl_item_SelectionChanged" >
+                    <Label Content="Price" HorizontalAlignment="Left" Margin="16,102,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
+                    <Label Content="Stock" HorizontalAlignment="Left" Margin="16,145,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
+                    <TextBox x:Name="txt_item_name" HorizontalAlignment="Left" Height="27" Margin="33.5,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="txt_item_price" HorizontalAlignment="Left" Height="27" Margin="33.5,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" Grid.Column="1" TextChanged="TextBox_TextChanged_1" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="txt_item_stock" HorizontalAlignment="Left" Height="31" Margin="33.5,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <DataGrid x:Name="tbl_item" Height="132" Margin="10,255,10,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AutoGenerateColumns="False" SelectionChanged="tbl_item_SelectionChanged" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -31,38 +37,41 @@
                             <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier.Name}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btn_item_insert" Content="Insert" HorizontalAlignment="Left" Margin="360,14,0,0" VerticalAlignment="Top" Width="74" Grid.Column="1" Click="btn_item_insert_Click" Height="20"/>
-                    <Button x:Name="btn_item_update" Content="Update" HorizontalAlignment="Left" Margin="359,48,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btn_item_update_Click" Height="20"/>
+                    <Button x:Name="btn_item_insert" Content="Insert" HorizontalAlignment="Left" Margin="636.5,28,0,0" VerticalAlignment="Top" Width="102" Grid.Column="2" Click="btn_item_insert_Click" Height="37"/>
+                    <Button x:Name="btn_item_update" Content="Update" HorizontalAlignment="Left" Margin="636.5,132,0,0" VerticalAlignment="Top" Width="102" Grid.Column="2" Click="btn_item_update_Click" Height="39"/>
                     <ComboBox x:Name="combo_supplier" 
                               ItemsSource="{Binding Suppliers}" 
                               DisplayMemberPath="Name" 
                               SelectedValuePath="Id" 
                               SelectionChanged="combo_supplier_SelectionChanged" 
-                              HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="22"/>
-                    <Label Content="Supplier" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
-                    <TextBox x:Name="txt_item_id" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="0,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Button x:Name="btn_item_delete" Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="360,96,0,0" VerticalAlignment="Top" Width="76" Height="20" Click="btn_item_delete_Click"/>
+                              HorizontalAlignment="Left" Margin="33.5,186,0,0" VerticalAlignment="Top" Width="350" Grid.Column="1" Height="35" Grid.ColumnSpan="2"/>
+                    <Label Content="Supplier" HorizontalAlignment="Left" Margin="16,195,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
+                    <TextBox x:Name="txt_item_id" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="0,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" IsReadOnly="True"/>
+                    <Button x:Name="btn_item_delete" Content="Delete" Grid.Column="2" HorizontalAlignment="Left" Margin="636.5,186,0,0" VerticalAlignment="Top" Width="102" Height="41" Click="btn_item_delete_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Supplier" Margin="-3,0,-0.5,-2" Height="24" VerticalAlignment="Top">
-                <Grid Background="#FFE5E5E5">
-                    <Label x:Name="Id" Content="Id" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.862,1.115" Margin="8,9,0,0" Height="23" Width="73"/>
-                    <Label Content="Name" HorizontalAlignment="Left" Margin="8,37,0,0" VerticalAlignment="Top" Height="36" Width="73"/>
-                    <Label Content="Address" HorizontalAlignment="Left" Margin="8,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,0.795" Height="27" Width="73"/>
-                    <TextBox x:Name="txt_id" HorizontalAlignment="Left" Height="17" Margin="86,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" TextChanged="TextBox_TextChanged" PreviewTextInput="txt_id_PreviewTextInput" IsReadOnly="True"/>
-                    <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="16" Margin="86,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" PreviewTextInput="txt_name_PreviewTextInput"/>
-                    <TextBox x:Name="txt_address" HorizontalAlignment="Left" Height="18" Margin="86,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" PreviewTextInput="txt_address_PreviewTextInput"/>
-                    <DataGrid x:Name="tbl_supplier" HorizontalAlignment="Left" Height="109" Margin="86,131,0,0" VerticalAlignment="Top" Width="328" SelectionChanged="tbl_supplier_SelectionChanged" AutoGenerateColumns="False">
+                <Grid Background="#FFE5E5E5" Margin="-2,20,2,-20">
+                    <Label x:Name="Id" Content="Id" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.862,1.115" Margin="8,20,0,0" Height="23" Width="73"/>
+                    <Label Content="Name" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Height="36" Width="73"/>
+                    <Label Content="Address" HorizontalAlignment="Left" Margin="8,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,0.795" Height="27" Width="73"/>
+                    <TextBox x:Name="txt_id" HorizontalAlignment="Left" Height="20" Margin="86,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="38" TextChanged="TextBox_TextChanged" PreviewTextInput="txt_id_PreviewTextInput" IsReadOnly="True"/>
+                    <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="37" Margin="86,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="384" PreviewTextInput="txt_name_PreviewTextInput"/>
+                    <TextBox x:Name="txt_address" HorizontalAlignment="Left" Height="31" Margin="86,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="384" PreviewTextInput="txt_address_PreviewTextInput"/>
+                    <DataGrid x:Name="tbl_supplier" HorizontalAlignment="Left" Height="181" Margin="35,219,0,0" VerticalAlignment="Top" Width="757" SelectionChanged="tbl_supplier_SelectionChanged" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button x:Name="btn_insert" Content="Insert" HorizontalAlignment="Left" Margin="326,10,0,0" VerticalAlignment="Top" Width="72" Click="Btn_Insert_Click" Height="22"/>
-                    <Button x:Name="btn_update" Content="Update" HorizontalAlignment="Left" Margin="326,37,0,0" VerticalAlignment="Top" Width="72" Click="btn_update_Click" Height="21" RenderTransformOrigin="0.858,1.536"/>
-                    <Button x:Name="btn_delete" Content="Delete" HorizontalAlignment="Left" Margin="326,88,0,0" VerticalAlignment="Top" Width="72" Click="btn_delete_Click" Height="21"/>
+                    <Button x:Name="btn_insert" Content="Insert" HorizontalAlignment="Left" Margin="714,17,0,0" VerticalAlignment="Top" Width="78" Click="Btn_Insert_Click" Height="28"/>
+                    <Button x:Name="btn_update" Content="Update" HorizontalAlignment="Left" Margin="714,115,0,0" VerticalAlignment="Top" Width="78" Click="btn_update_Click" Height="26" RenderTransformOrigin="0.858,1.536"/>
+                    <Button x:Name="btn_delete" Content="Delete" HorizontalAlignment="Left" Margin="714,166,0,0" VerticalAlignment="Top" Width="78" Click="btn_delete_Click" Height="28"/>
+                    <Label Content="Email" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txt_email" HorizontalAlignment="Left" Height="24" Margin="86,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="384"/>
                 </Grid>
             </TabItem>
         </TabControl>

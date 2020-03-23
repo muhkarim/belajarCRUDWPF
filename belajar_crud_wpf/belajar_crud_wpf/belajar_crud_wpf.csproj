@@ -43,6 +43,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.2.920, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.0.1.920, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.3.0.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -64,6 +70,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +85,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.xaml.cs">
+      <DependentUpon>ForgotPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -86,9 +106,14 @@
     <Compile Include="Migrations\202003200916083_add_model_item.designer.cs">
       <DependentUpon>202003200916083_add_model_item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003230227535_add_role_model.cs" />
+    <Compile Include="Migrations\202003230227535_add_role_model.designer.cs">
+      <DependentUpon>202003230227535_add_role_model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Supplier.cs" />
+    <Compile Include="Model\Role.cs" />
     <Compile Include="MyContext\myContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -108,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003200916083_add_model_item.resx">
       <DependentUpon>202003200916083_add_model_item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003230227535_add_role_model.resx">
+      <DependentUpon>202003230227535_add_role_model.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -129,6 +157,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" />
 </Project>

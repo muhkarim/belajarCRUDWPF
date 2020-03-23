@@ -14,6 +14,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Address = c.String(),
+                        Email = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

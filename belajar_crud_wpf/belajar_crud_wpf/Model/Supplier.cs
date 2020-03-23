@@ -15,16 +15,23 @@ namespace belajar_crud_wpf.Model
         public int Id {get; set;}
         public string Name { get; set; }
         public string Address { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Role Role { get; set; }
 
         public Supplier()
         {
             
         }
 
-        public Supplier(String name, String address)
+        public Supplier(String name, String address, String email, String password)
         {
             this.Name = name;
             this.Address = address;
+            this.Email = email;
+            this.Password = password;
+            
+            
         }
     }
 }
