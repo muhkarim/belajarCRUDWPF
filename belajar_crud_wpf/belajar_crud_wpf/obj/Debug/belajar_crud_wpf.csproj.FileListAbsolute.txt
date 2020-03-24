@@ -10,7 +10,6 @@ C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\bin\Debug\MaterialDesignColors.pdb
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\bin\Debug\MaterialDesignThemes.Wpf.xml
-C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\belajar_crud_wpf.csprojResolveAssemblyReference.cache
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\ForgotPassword.g.cs
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\Login.g.cs
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\MainWindow.g.cs
@@ -29,3 +28,4 @@ C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\belajar_crud_wpf.csproj.GenerateResource.Cache
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\belajar_crud_wpf.exe
 C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\belajar_crud_wpf.pdb
+C:\Users\Karim\Documents\Visual Studio 2017\Projects\belajarCRUDWPF\belajar_crud_wpf\belajar_crud_wpf\obj\Debug\belajar_crud_wpf.csprojResolveAssemblyReference.cache

@@ -22,7 +22,9 @@ using System.Drawing;
 using System.Configuration;
 using System.Data.SqlClient;
 
- 
+
+
+
 namespace belajar_crud_wpf
 {
     /// <summary>
@@ -32,13 +34,13 @@ namespace belajar_crud_wpf
     {
         myContext conn = new myContext(); // ceclare new obj myContext
 
-        public int cb_sup; // menampung supplier_id
+        public int cb_sup; // menampung supplier_id yang di select
 
-        public int cb_role;
+        public int cb_role; // menampung role_id yang di select
 
-        public string email;
+        public string email; // menampung getemail dari login user
 
-        public MainWindow(String remail)
+        public MainWindow(String getemail)
         {
             InitializeComponent();
 
@@ -48,24 +50,23 @@ namespace belajar_crud_wpf
 
             combo_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh combo suppliers
 
-            combo_role.ItemsSource = conn.Roles.ToList();
+            combo_role.ItemsSource = conn.Roles.ToList(); // refresh combobox role
 
-            email = remail;
+            email = getemail; // save email from login
 
-            roleAcces();
+            roleAcces(); // call function roleacces
         }
 
-
+        // method role akses menu
         private void roleAcces()
         {
             var role_acces = conn.Suppliers.Where(S => S.Email == email).FirstOrDefault();
-            if(role_acces.Role.Id == 2)
+            if(role_acces.Role.Id == 2) // role 2 is supplier
             {
                 tab2.IsSelected = true;
                 tab1.IsEnabled = false;
                 tab1.IsSelected = false;
-
-
+                tab1.Visibility = Visibility.Collapsed;
 
             } else
             {
@@ -118,10 +119,12 @@ namespace belajar_crud_wpf
                 txt_name.Text = string.Empty;
                 txt_address.Text = string.Empty;
                 txt_email.Text = string.Empty;
+                combo_role.Text = string.Empty;
                 MessageBox.Show("Data Berhasil ditambahkan");
             }
 
             tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh table
+            combo_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh combo box supplier
 
         }
 
@@ -193,7 +196,7 @@ namespace belajar_crud_wpf
         // Set up combo supplier
         private void combo_supplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cb_sup = Convert.ToInt32(combo_supplier.SelectedValue); // handle load supplier input in Item menu
+            cb_sup = Convert.ToInt32(combo_supplier.SelectedValue); 
         }
 
         // Insert Item
@@ -242,6 +245,7 @@ namespace belajar_crud_wpf
                     var insert = conn.SaveChanges();
 
                     MessageBox.Show(insert + "Data telah ditambahkan...");
+                    txt_item_id.Text = string.Empty;
                     txt_item_name.Text = string.Empty;
                     txt_item_price.Text = string.Empty;
                     txt_item_stock.Text = string.Empty;
@@ -263,6 +267,9 @@ namespace belajar_crud_wpf
         // Select datagrid table item
         private void tbl_item_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+           
+
             var data = tbl_item.SelectedItem;
 
             if (data == null)
@@ -287,6 +294,10 @@ namespace belajar_crud_wpf
                 combo_supplier.Text = supplier;
 
             }
+
+           
+
+
         }
 
         // Update Item
@@ -406,6 +417,108 @@ namespace belajar_crud_wpf
         private void combo_role_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cb_role = Convert.ToInt32(combo_role.SelectedValue);
+        }
+
+        private void btn_item_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            txt_item_id.Text = string.Empty;
+            txt_item_name.Text = string.Empty;
+            txt_item_price.Text = string.Empty;
+            txt_item_stock.Text = string.Empty;
+            combo_supplier.Text = string.Empty;
+        }
+
+        private void btn_sup_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            txt_id.Text = string.Empty;
+            txt_name.Text = string.Empty;
+            txt_address.Text = string.Empty;
+            txt_email.Text = string.Empty;
+            combo_role.Text = string.Empty;
+        }
+
+
+
+        private void Btn_Item_Search_Click(object sender, RoutedEventArgs e)
+        {
+            List<Item> filterItem = new List<Item>();
+
+            int parsedValue;
+
+            if(txt_item_search.Text == "")
+            {
+                tbl_item.ItemsSource = conn.Items.ToList();
+            }
+            else
+            {
+                foreach(Item itm in conn.Items.ToList())
+                {
+                    if (itm.Name.ToLower().Contains(txt_item_search.Text.ToLower()))
+                    {
+                        filterItem.Add(itm);
+                    }
+                    else if (int.TryParse(txt_item_search.Text, out parsedValue))
+                    {
+                        if (itm.Id.Equals(Convert.ToInt32(txt_item_search.Text)))
+                        {
+                            filterItem.Add(itm);
+                        }
+                        else if (itm.Price.Equals(Convert.ToInt32(txt_item_search.Text)))
+                        {
+                            filterItem.Add(itm);
+                        }
+                        else if (itm.Stock.Equals(Convert.ToInt32(txt_item_search.Text)))
+                        {
+                            filterItem.Add(itm);
+                        }
+                    }
+                   
+                }
+
+                tbl_item.ItemsSource = filterItem.ToList();
+            }
+           
+        }
+
+        private void Btn_Supp_Search_Click(object sender, RoutedEventArgs e)
+        {
+            List<Supplier> filterSupplier = new List<Supplier>(); // new object supplier
+
+            int parsedValue;
+
+            if (txt_supp_search.Text == "")
+            {
+                tbl_supplier.ItemsSource = conn.Suppliers.ToList(); // refresh
+            }
+            else
+            {
+                foreach (Supplier s in conn.Suppliers.ToList())
+                {
+                    if (s.Name.ToLower().Contains(txt_supp_search.Text.ToLower()))
+                    {
+                        filterSupplier.Add(s);
+                    }
+                    else if (int.TryParse(txt_supp_search.Text, out parsedValue))
+                    {
+                        if (s.Id.Equals(Convert.ToInt32(txt_supp_search.Text)))
+                        {
+                            filterSupplier.Add(s);
+                        }
+                        
+                    }
+                    else if (s.Address.ToLower().Contains(txt_supp_search.Text.ToLower()))
+                    {
+                        filterSupplier.Add(s);
+                    }
+                    else if (s.Email.ToLower().Contains(txt_supp_search.Text.ToLower()))
+                    {
+                        filterSupplier.Add(s);
+                    }
+
+                }
+
+                tbl_supplier.ItemsSource = filterSupplier.ToList();
+            }
         }
     }
 }
